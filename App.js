@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, FlatList, Alert} from 'react-native';
 import Header from './components/Header.jsx';
 import TodoItem from './components/TodoItem.jsx';
 import AddTodo from './components/AddTodo.jsx';
@@ -19,6 +19,7 @@ export default function App () {
       id: '3',
     },
   ]);
+  const [error, setError] = useState ('');
 
   // Handle delete function
   const handleDelete = id => {
@@ -27,16 +28,23 @@ export default function App () {
 
   // submit new todo function
   const submitHandler = text => {
-    setTodos (prevTodos => [
-      ...prevTodos,
-      {text: text, id: Math.random ().toString ()},
-    ]);
+    if (text.length < 4) {
+      setError ("Characters can't be less than 4");
+      Alert.alert ('Oops!', "Characters can't be less than 4", [{text: 'OK'}]);
+    } else {
+      setTodos (prevTodos => [
+        ...prevTodos,
+        {text: text, id: Math.random ().toString ()},
+      ]);
+      setError ('');
+    }
   };
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
         <AddTodo submitHandler={submitHandler} />
+        <Text style={styles.error}>{error}</Text>
         <View style={styles.list}>
           <FlatList
             data={todos}
@@ -62,5 +70,9 @@ const styles = StyleSheet.create ({
   },
   list: {
     paddingVertical: 20,
+  },
+  error: {
+    color: 'red',
+    fontSize: 14,
   },
 });
