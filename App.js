@@ -5,6 +5,7 @@ import TodoItem from './components/TodoItem.jsx';
 import AddTodo from './components/AddTodo.jsx';
 
 export default function App () {
+  const [text, setText] = useState ('');
   const [todos, setTodos] = useState ([
     {
       text: 'Watch football',
@@ -21,6 +22,11 @@ export default function App () {
   ]);
   const [error, setError] = useState ('');
 
+  // Add text function
+  const addTodoHandler = text => {
+    setText (text);
+  };
+
   // Handle delete function
   const handleDelete = id => {
     setTodos (prevTodos => prevTodos.filter (todo => todo.id != id));
@@ -31,21 +37,28 @@ export default function App () {
     if (text.length < 4) {
       setError ("Characters can't be less than 4");
       Alert.alert ('Oops!', "Characters can't be less than 4", [{text: 'OK'}]);
+      setText ('');
     } else {
       setTodos (prevTodos => [
         ...prevTodos,
         {text: text, id: Math.random ().toString ()},
       ]);
       setError ('');
+      setText ('');
     }
   };
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
-        <AddTodo submitHandler={submitHandler} />
+        <AddTodo
+          submitHandler={submitHandler}
+          addTodoHandler={addTodoHandler}
+          text={text}
+        />
         <Text style={styles.error}>{error}</Text>
         <View style={styles.list}>
+          <Text style={styles.title}>Todo Items</Text>
           <FlatList
             data={todos}
             renderItem={({item}) => (
@@ -70,6 +83,11 @@ const styles = StyleSheet.create ({
   },
   list: {
     paddingVertical: 20,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    paddingBottom: 3,
   },
   error: {
     color: 'red',

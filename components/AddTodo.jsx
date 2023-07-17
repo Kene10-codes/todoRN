@@ -1,12 +1,7 @@
 import {useState} from 'react';
 import {View, Text, StyleSheet, TextInput, Button} from 'react-native';
 
-export default function Header({submitHandler}) {
-  const [text, setText] = useState ('');
-
-  const addTodoHandler = text => {
-    setText (text);
-  };
+export default function Header({submitHandler, addTodoHandler, text}) {
   return (
     <View style={styles.form}>
       <TextInput
@@ -14,7 +9,6 @@ export default function Header({submitHandler}) {
         onChangeText={addTodoHandler}
         style={styles.input}
       />
-
       <Button
         title="Add todo"
         color="blue"

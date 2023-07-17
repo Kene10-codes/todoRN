@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 export default function TodoItem({item, handleDelete}) {
   return (
     <TouchableOpacity onPress={() => handleDelete (item.id)}>
-      <Text style={styles.todo}>{item.id} Name: {item.text}</Text>
+      <Text style={styles.todo}>{item.text}</Text>
     </TouchableOpacity>
   );
 }
