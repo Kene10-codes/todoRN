@@ -20,5 +20,7 @@ export default function Header({submitHandler, addTodoHandler, text}) {
 
 const styles = StyleSheet.create ({
   form: {},
-  input: {},
+  input: {
+    
+  },
 });

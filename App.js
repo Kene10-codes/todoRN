@@ -45,7 +45,6 @@ export default function App () {
     if (text.length < 4) {
       setError ("Characters can't be less than 4");
       Alert.alert ('Oops!', "Characters can't be less than 4", [{text: 'OK'}]);
-      setText ('');
     } else {
       setTodos (prevTodos => [
         ...prevTodos,
@@ -93,9 +92,12 @@ const styles = StyleSheet.create ({
     marginTop: 25,
   },
   content: {
+    flex: 1,
     paddingHorizontal: 10,
+    marginTop: 30,
   },
   list: {
+    flex: 1,
     paddingVertical: 20,
   },
   title: {
