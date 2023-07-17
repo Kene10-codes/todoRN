@@ -1,5 +1,13 @@
 import {useState} from 'react';
-import {StyleSheet, Text, View, FlatList, Alert} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
 import Header from './components/Header.jsx';
 import TodoItem from './components/TodoItem.jsx';
 import AddTodo from './components/AddTodo.jsx';
@@ -48,27 +56,33 @@ export default function App () {
     }
   };
   return (
-    <View style={styles.container}>
-      <Header />
-      <View style={styles.content}>
-        <AddTodo
-          submitHandler={submitHandler}
-          addTodoHandler={addTodoHandler}
-          text={text}
-        />
-        <Text style={styles.error}>{error}</Text>
-        <View style={styles.list}>
-          <Text style={styles.title}>Todo Items</Text>
-          <FlatList
-            data={todos}
-            renderItem={({item}) => (
-              <TodoItem item={item} handleDelete={handleDelete} />
-            )}
-            keyExtractor={item => item.id}
+    <TouchableWithoutFeedback
+      onPress={() => {
+        Keyboard.dismiss ();
+      }}
+    >
+      <View style={styles.container}>
+        <Header />
+        <View style={styles.content}>
+          <AddTodo
+            submitHandler={submitHandler}
+            addTodoHandler={addTodoHandler}
+            text={text}
           />
+          <Text style={styles.error}>{error}</Text>
+          <View style={styles.list}>
+            <Text style={styles.title}>Todo Items</Text>
+            <FlatList
+              data={todos}
+              renderItem={({item}) => (
+                <TodoItem item={item} handleDelete={handleDelete} />
+              )}
+              keyExtractor={item => item.id}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
