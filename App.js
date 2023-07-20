@@ -51,7 +51,6 @@ export default function App () {
         {text: text, id: Math.random ().toString ()},
       ]);
       setError ('');
-      setText ('');
     }
   };
   return (
@@ -98,7 +97,8 @@ const styles = StyleSheet.create ({
   },
   list: {
     flex: 1,
-    paddingVertical: 20,
+    paddingVertical: 10,
+    marginBottom: 80,
   },
   title: {
     fontSize: 22,

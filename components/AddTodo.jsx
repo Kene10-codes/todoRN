@@ -1,14 +1,10 @@
 import {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, Button} from 'react-native';
+import {View, Text, TextInput, Button} from 'react-native';
 
 export default function Header({submitHandler, addTodoHandler, text}) {
   return (
-    <View style={styles.form}>
-      <TextInput
-        placeholder="Add todo.."
-        onChangeText={addTodoHandler}
-        style={styles.input}
-      />
+    <View>
+      <TextInput placeholder="Add todo.." onChangeText={addTodoHandler} />
       <Button
         title="Add todo"
         color="blue"
@@ -17,10 +13,3 @@ export default function Header({submitHandler, addTodoHandler, text}) {
     </View>
   );
 }
-
-const styles = StyleSheet.create ({
-  form: {},
-  input: {
-    
-  },
-});
